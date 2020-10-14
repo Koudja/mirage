@@ -3,13 +3,13 @@
 from dataclasses import asdict
 from typing import Dict, Set
 
-from .filters import FieldStringFilter, FieldSubstringFilter, ModelFilter
+from .filters import FieldRegexFilter, FieldStringFilter, FieldSubstringFilter, ModelFilter
 from .items import Account, AccountOrRoom, Room
 from .model import Model
 from .model_item import ModelItem
 
 
-class AllRooms(FieldSubstringFilter):
+class AllRooms(FieldRegexFilter):
     """Flat filtered list of all accounts and their rooms."""
 
     def __init__(self, accounts: Model) -> None:

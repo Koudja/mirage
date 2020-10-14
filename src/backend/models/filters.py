@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
+import re
+
 from typing import (
     TYPE_CHECKING, Any, Callable, Collection, Dict, List, Optional, Tuple,
 )
@@ -191,3 +193,13 @@ class FieldSubstringFilter(FieldStringFilter):
                 return False
 
         return True
+
+
+class FieldRegexFilter(FieldStringFilter):
+    def match(self, fields: Dict[str, str], filtr: str) -> bool:
+        regex = re.compile(filtr)
+        for value in fields.values():
+            if regex.match(value):
+                return True
+
+        return False
